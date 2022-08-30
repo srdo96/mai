@@ -25,6 +25,8 @@ if [[ $answer = y ]] ; then
   mkfs.vfat -F 32 $efipartition
 fi
 mount $partition /mnt 
+mount --mkdir $efipartition /mnt/boot
+
 pacstrap /mnt base base-devel linux linux-firmware
 genfstab -U /mnt >> /mnt/etc/fstab
 sed '1,/^#part2$/d' `basename $0` > /mnt/arch_install2.sh
